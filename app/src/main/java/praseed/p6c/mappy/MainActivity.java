@@ -22,18 +22,21 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener ,LocationListener{
 
     private String TAG = "MainActivity";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
     private Location mLastLocation;
+    private LocationRequest mLocationRequest;
+    private boolean status = false;
     // Google client to interact with Google API
     private GoogleApiClient ApiClient;
     //Check Location Acess
-    LocationManager lm ;
+    LocationManager lm;
     boolean gps_enabled = false;
     boolean network_enabled = false;
     //UI
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
             // Building the GoogleApi client
             buildGoogleApiClient();
+            createLocationRequest();
         } else {
             Log.d(TAG, "onCreate: noPlayServices");
         }
@@ -62,10 +66,45 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         bgetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLocation();
+                Log.d(TAG, "onClick: clicked");
+                if(ApiClient.isConnected() && !status) {
+                    status = true;
+                    startLocationUpdates();
+                }
             }
         });
 
+    }
+
+
+    protected void createLocationRequest() {
+        Log.d(TAG, "createLocationRequest: ");
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setNumUpdates(1);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    protected void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Log.d(TAG, "startLocationUpdates: ");
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                ApiClient, mLocationRequest, (LocationListener) this);
+    }
+
+    protected void stopLocationUpdates() {
+        Log.d(TAG, "stopLocationUpdates: ");
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                ApiClient, (LocationListener) this);
     }
 
     private void showLocation() {
@@ -90,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if(accuracy > 1500){
                 Log.d(TAG, "showLocation: accuracy > 1500 : ");
                 Toast.makeText(MainActivity.this, R.string.poorAccuracy, Toast.LENGTH_SHORT).show();
-                return;
+               // return;
             }
             else if(accuracy > 500){
                 Log.d(TAG, "showLocation: LowAccu");
@@ -99,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             lat_display.setText("Lat : "+latitude);
             long_display.setText("Long : "+longitude);
             acc_display.setText(accuracy+" m");
+            status = false;
 
         } else {
             Toast.makeText(MainActivity.this, R.string.noLocation_Msg, Toast.LENGTH_SHORT).show();
@@ -128,6 +168,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onResume();
         Log.d(TAG, "onResume: ");
         checkLocationAcess();
+        if(ApiClient.isConnected() && !status) {
+            status = true;
+            startLocationUpdates();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+        stopLocationUpdates();
     }
 
     @Override
@@ -217,5 +268,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             dialog.create().show();
             return;
         }
+    }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        showLocation();
     }
 }
