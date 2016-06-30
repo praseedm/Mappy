@@ -2,4 +2,7 @@
     <string name="app_name">Mappy</string>
     <string name="main_Message">YOU ARE AT</string>
     <string name="btnShow_Msg">GET MY LOCATION</string>
+    <string name="noLocation_Msg">Couldn\'t get the location. Make sure location is enabled on the device</string>
+    <string name="lowAccuracy">Low Acccuracy ! Better TRY AGAIN</string>
+    <string name="poorAccuracy">POOR ACCURACY ! TRY AGAIN</string>
 </resources>
