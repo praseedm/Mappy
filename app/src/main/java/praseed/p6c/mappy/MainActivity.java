@@ -35,10 +35,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private boolean status = false;
     // Google client to interact with Google API
     private GoogleApiClient ApiClient;
+    private static int REQUEST_CODE_RECOVER_PLAY_SERVICES = 200;
     //Check Location Acess
     LocationManager lm;
     boolean gps_enabled = false;
     boolean network_enabled = false;
+
+    // Location updates intervals in sec
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
+
     //UI
     private TextView lat_display, long_display, acc_display;
     private Button bgetLocation;
@@ -67,10 +74,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked");
-                if(ApiClient.isConnected() && !status) {
-                    status = true;
+                if(ApiClient.isConnected() ) {
                     startLocationUpdates();
                 }
+                else
+                {
+                    Log.d(TAG, "onClick: else");
+                    ApiClient.connect();
+                }
+                
             }
         });
 
@@ -80,9 +92,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void createLocationRequest() {
         Log.d(TAG, "createLocationRequest: ");
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setNumUpdates(1);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
 
     protected void startLocationUpdates() {
@@ -97,12 +110,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             return;
         }
         Log.d(TAG, "startLocationUpdates: ");
+        if(ApiClient.isConnected()){
+            status = true;
+            Log.d(TAG, "startLocationUpdates: connected");
+        }
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 ApiClient, mLocationRequest, (LocationListener) this);
     }
 
     protected void stopLocationUpdates() {
         Log.d(TAG, "stopLocationUpdates: ");
+        status = false;
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 ApiClient, (LocationListener) this);
     }
@@ -185,7 +203,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onStop() {
         Log.d(TAG, "onStop: ");
         super.onStop();
-        if (ApiClient.isConnected()) {
+        if (ApiClient != null) {
+            Log.d(TAG, "onStop: API disconnect");
             ApiClient.disconnect();
         }
     }
@@ -193,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.d(TAG, "API onConnected: ");
+        showLocation();
     }
 
     @Override
@@ -219,6 +239,23 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_RECOVER_PLAY_SERVICES) {
+            if (resultCode == RESULT_OK) {
+                // Make sure the app is not already connected or attempting to connect
+                if (!ApiClient.isConnecting() &&
+                        !ApiClient.isConnected()) {
+                    ApiClient.connect();
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Google Play Services must be installed.",
+                        Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
     }
 
     //Function to checkLocationAcess Location Acess
