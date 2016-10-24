@@ -78,16 +78,17 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/listButton"
-            android:padding="5dp"
-            android:text="list"/>
+            android:padding="3dp"
+            android:background="@drawable/button_states"
+            android:src="@drawable/list_icon"/>
 
         <Button
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:id="@+id/btnShowLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,13 +98,45 @@
             android:text="@string/btnShow_Msg"
             android:textColor="@color/white" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:src="@drawable/save_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/button_states"
             android:id="@+id/saveButton"
-            android:padding="5dp"
-            android:text="save"/>
+            android:padding="3dp"/>
     </LinearLayout>
+
+    <Button
+        android:drawableLeft="@drawable/google_btn"
+        android:id="@+id/loginbtn"
+        android:background="@drawable/bg_btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:text="LOGIN"
+        android:textAllCaps="true"
+        android:textSize="17sp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:onClick="loginaction"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif"
+        />
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/announcement"
+        android:textSize="15sp"
+        android:text="check"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center"/>
+
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/bannerAd"
@@ -111,5 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id">
+
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>
