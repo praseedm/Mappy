@@ -135,13 +135,13 @@ public  abstract class LocationDaemon implements GoogleApiClient.ConnectionCallb
         // Toast.makeText(context, "LocarionDaemon UpdateStartED", Toast.LENGTH_SHORT).show();
         mTrackStatus = true;
         if(ApiClient.isConnected()){
-            Toast.makeText(context, "LocarionDaemon CoNNected", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "CoNNected", Toast.LENGTH_SHORT).show();
 
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     ApiClient, mLocationRequest, this);
         }
         else {
-            Toast.makeText(context, " LocarionDaemon DisconnectED", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Failed ! DisconnectED", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -150,7 +150,7 @@ public  abstract class LocationDaemon implements GoogleApiClient.ConnectionCallb
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 ApiClient, this);
         mTrackStatus = false;
-        Toast.makeText(context, "UpdateStoppED", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "UpdateStoppED", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -68,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "CHANGED", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onLocationChanged: ");
                 showLocation();
+                trackStatus = false;
+                mLocationDaemon.stopLocationUpdates();
             }
         };
         mLocationDaemon.connect();
@@ -78,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 track();
             }
         });
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+        AdView mAdView = (AdView) findViewById(R.id.bannerAd);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 
@@ -91,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         else {
             Log.d(TAG, "track: Stopping");
             trackStatus = false;
-
             mLocationDaemon.stopLocationUpdates();
         }
     }

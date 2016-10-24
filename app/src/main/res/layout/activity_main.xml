@@ -1,81 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/view_bg"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context="praseed.p6c.mappy.MainActivity">
 
     <ImageView
         android:id="@+id/marker"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/marker" />
 
     <TextView
         android:id="@+id/main_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:text="@string/main_Message"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/lat_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="15dp"
-        android:textColor="@color/white"
         android:text="lat"
+        android:textColor="@color/white"
         android:textSize="16sp" />
+
     <TextView
         android:id="@+id/long_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="15dp"
-        android:textColor="@color/white"
         android:text="lat"
+        android:textColor="@color/white"
         android:textSize="16sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:textColor="@color/white"
             android:text="ACCURACY  ="
+            android:textColor="@color/white"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/acc_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:textColor="@color/white"
             android:text="0 m"
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listButton"
+            android:padding="5dp"
+            android:text="list"/>
 
-    <Button
-        android:id="@+id/btnShowLocation"
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/btnShowLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/btnShow_Msg"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveButton"
+            android:padding="5dp"
+            android:text="save"/>
+    </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/bannerAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:background="@color/colorAccent"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:text="@string/btnShow_Msg"
-        android:textColor="@color/white" />
+        android:layout_marginTop="10dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 </LinearLayout>
