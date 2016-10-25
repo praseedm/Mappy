@@ -84,7 +84,8 @@
             android:id="@+id/listButton"
             android:padding="3dp"
             android:background="@drawable/button_states"
-            android:src="@drawable/list_icon"/>
+            android:src="@drawable/list_icon"
+            android:onClick="showList"/>
 
         <Button
             android:layout_marginLeft="8dp"
@@ -104,7 +105,8 @@
             android:layout_height="60dp"
             android:background="@drawable/button_states"
             android:id="@+id/saveButton"
-            android:padding="3dp"/>
+            android:padding="3dp"
+            android:onClick="saveLoc"/>
     </LinearLayout>
 
     <Button
@@ -144,7 +146,7 @@
         android:id="@+id/bannerAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
 

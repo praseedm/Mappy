@@ -6,4 +6,6 @@
     <string name="lowAccuracy">Low Acccuracy ! Better TRY AGAIN</string>
     <string name="poorAccuracy">POOR ACCURACY ! TRY AGAIN</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="no_internet_message">Failed ! no internet connectivity</string>
+    <string name="save_failedminimum">Failed ! Minimum 2 characters required.</string>
 </resources>
