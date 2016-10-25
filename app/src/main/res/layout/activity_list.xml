@@ -8,7 +8,8 @@
     tools:context="praseed.p6c.mappy.ListActivity">
 
     <com.google.android.gms.ads.AdView
-        android:layout_margin="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="2dp"
         android:id="@+id/bannerAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +19,7 @@
     </com.google.android.gms.ads.AdView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/snapRecyclerView"
+        android:id="@+id/locRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/bannerAd" />

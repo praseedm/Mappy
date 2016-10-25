@@ -1,154 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:isScrollContainer="true"
     android:background="@color/view_bg"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context="praseed.p6c.mappy.MainActivity">
-
-    <ImageView
-        android:id="@+id/marker"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/marker" />
-
-    <TextView
-        android:id="@+id/main_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/main_Message"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/lat_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:text="lat"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/long_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:text="lat"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+    android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/view_bg"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:context="praseed.p6c.mappy.MainActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="ACCURACY  ="
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/acc_display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="0 m"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageButton
+        <ImageView
+            android:id="@+id/marker"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/listButton"
-            android:padding="3dp"
-            android:background="@drawable/button_states"
-            android:src="@drawable/list_icon"
-            android:onClick="showList"/>
+            android:layout_marginTop="25dp"
+            android:src="@drawable/marker" />
+
+        <TextView
+            android:id="@+id/main_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/main_Message"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lat_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="lat"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/long_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="lat"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="ACCURACY  ="
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/acc_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="0 m"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/listButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button_states"
+                android:onClick="showList"
+                android:padding="3dp"
+                android:src="@drawable/list_icon" />
+
+            <Button
+                android:id="@+id/btnShowLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/bg_button"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/btnShow_Msg"
+                android:textColor="@color/white" />
+
+            <ImageButton
+                android:id="@+id/saveButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button_states"
+                android:onClick="saveLoc"
+                android:padding="3dp"
+                android:src="@drawable/save_icon" />
+        </LinearLayout>
 
         <Button
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:id="@+id/btnShowLocation"
+            android:id="@+id/loginbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_button"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/btnShow_Msg"
-            android:textColor="@color/white" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_login"
+            android:drawableLeft="@drawable/google_btn"
+            android:fontFamily="sans-serif"
+            android:onClick="loginaction"
+            android:paddingBottom="5dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="5dp"
+            android:text="LOGIN"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
 
-        <ImageButton
-            android:src="@drawable/save_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/button_states"
-            android:id="@+id/saveButton"
-            android:padding="3dp"
-            android:onClick="saveLoc"/>
+        <TextView
+            android:id="@+id/announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="check"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/bannerAd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id">
+
+        </com.google.android.gms.ads.AdView>
     </LinearLayout>
-
-    <Button
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:drawableLeft="@drawable/google_btn"
-        android:id="@+id/loginbtn"
-        android:background="@drawable/bg_btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:text="LOGIN"
-        android:textAllCaps="true"
-        android:textSize="17sp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:onClick="loginaction"
-        android:textColor="#FFFFFF"
-        android:fontFamily="sans-serif"
-        />
-
-    <TextView
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/announcement"
-        android:textSize="15sp"
-        android:text="check"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"/>
-
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/bannerAd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-
-    </com.google.android.gms.ads.AdView>
-</LinearLayout>
+</ScrollView>

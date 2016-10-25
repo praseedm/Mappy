@@ -1,5 +1,7 @@
 package praseed.p6c.mappy;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by praseedm on 10/25/2016.
  */
@@ -8,16 +10,17 @@ public class LocObj {
     public String name;
     public String id;
     public double mLatitude , mLongitude;
-    public float mAccuracy;
+    public int mAccuracy;
 
     public LocObj() {
     }
 
-    public LocObj(double mLatitude, double mLongitude, float mAccuracy) {
+    public LocObj(double mLatitude, double mLongitude, int mAccuracy) {
         this.mLatitude = mLatitude;
         this.mLongitude = mLongitude;
         this.mAccuracy = mAccuracy;
     }
+
 
     public String getName() {
         return name;
@@ -51,11 +54,11 @@ public class LocObj {
         this.mLongitude = mLongitude;
     }
 
-    public float getmAccuracy() {
+    public int getmAccuracy() {
         return mAccuracy;
     }
 
-    public void setmAccuracy(float mAccuracy) {
+    public void setmAccuracy(int mAccuracy) {
         this.mAccuracy = mAccuracy;
     }
 }

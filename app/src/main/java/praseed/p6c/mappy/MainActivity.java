@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveLoc(View Sview) {
         if (mLocationObj != null && mFbUser != null) {
-            loc = new LocObj(mLocationObj.getmLatitude(), mLocationObj.getmLongitude(), mLocationObj.getmAccuracy());
+            loc = new LocObj(mLocationObj.getmLatitude(), mLocationObj.getmLongitude(), (int) mLocationObj.getmAccuracy());
 
             View view = getLayoutInflater().inflate(R.layout.userinput, null);
             savName = (EditText) view.findViewById(R.id.locName);
