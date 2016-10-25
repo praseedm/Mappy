@@ -330,5 +330,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showList(View view) {
+        Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        startActivity(intent);
     }
 }
